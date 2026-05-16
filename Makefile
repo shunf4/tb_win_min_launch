@@ -1,6 +1,6 @@
 CC = x86_64-w64-mingw32-gcc
 CFLAGS = -O2 -Wall -municode
-LDFLAGS_EXE = -lkernel32 -luser32
+LDFLAGS_EXE = -lkernel32 -luser32 -lshlwapi
 LDFLAGS_DLL = -lkernel32 -luser32
 
 MINHOOK_DIR = minhook

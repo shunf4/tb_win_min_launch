@@ -206,6 +206,24 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine
         }
     }
 
+    {
+        // Create a modifiable buffer for the path
+        wchar_t dir_path[MAX_PATH];
+        wcsncpy_s(dir_path, MAX_PATH, target_exe, _TRUNCATE);
+
+        // Remove the file name to isolate the directory path (Unicode version)
+        if (PathRemoveFileSpecW(dir_path)) {
+            // Change the current working directory (Unicode version)
+            if (SetCurrentDirectoryW(dir_path)) {
+                fwprintf(stderr, L"Successfully changed directory to: %s\n", dir_path);
+            } else {
+                fwprintf(stderr, L"Failed to change directory. Error: %lu\n", GetLastError());
+            }
+        } else {
+            fwprintf(stderr, L"Failed to parse the directory from the path.\n");
+        }
+    }
+
     WCHAR dll_path[MAX_PATH];
     if (!get_dll_path(dll_path, MAX_PATH)) {
         fwprintf(stderr, L"Error: Cannot determine DLL path.\n");
