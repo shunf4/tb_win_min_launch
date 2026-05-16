@@ -1,10 +1,17 @@
 ### tb_win_min_launch
 
-This is a half-vibe-coded (a large part written by LLM, reviewed and manually
-modified) tool.
+> [!WARNING]
+> This is a half-vibe-coded (a large part written by LLM, reviewed and manually
+> modified) tool.
 
 A tool that injects, hooks and launches Thunderbird Mail x64 on Windows in
 **minimized** mode.
+
+Because Thunderbird Mail (also Firefox from Mozilla) doesn't respect
+SW_MINIMIZE flag (that is, when you select "Start Minimized" in a shortcut)
+when run as a process, possibly because it builds and brings
+up the window in some background task/logic, which is a bit of nuisance to me.
+Also see [this Mozilla Connect issue](https://connect.mozilla.org/t5/ideas/add-option-to-start-thunderbird-on-minimized-system-startup/idi-p/36288).
 
 Build the tool with MinGW-w64 toolchain (I am using the one in Cygwin),
 and start `tb_win_min_launch.exe`, and that should launch Thunderbird Mail
