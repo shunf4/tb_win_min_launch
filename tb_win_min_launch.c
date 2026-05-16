@@ -278,7 +278,26 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine
     /* Resume main thread – hooks are in place */
     ResumeThread(pi.hThread);
 
-    /* Keep shared memory alive until timeout */
+    // Suppress mouse spinner cursor ("Working in Background" pointer state)
+    // now.
+
+    // Gemini says: According to Microsoft's developer documentation, the system turns off the feedback cursor exclusively after the first call to GetMessage, regardless of whether a window is drawn.
+    // It may not be correct, but doing this actually works.
+    {
+        // Post a harmless message directly into your own thread queue
+        PostThreadMessage(GetCurrentThreadId(), WM_USER, 0, 0);
+
+        // Immediately consume it. The transition of GetMessage picking up an 
+        // actual event terminates the OS feedback timer safely.
+        MSG msg;
+        if (GetMessage(&msg, NULL, 0, 0)) {
+            TranslateMessage(&msg);
+            DispatchMessage(&msg);
+        }
+    }
+
+
+    // /* Keep shared memory alive until timeout */
     Sleep((DWORD)timeout_sec * 1000);
 
     UnmapViewOfFile(shared);
