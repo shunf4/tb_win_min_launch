@@ -1,6 +1,12 @@
 ### tb_win_min_launch
 
 > [!WARNING]
+> **DO NOT USE THE TOOL NOW**
+> I no longer receive any new mail notifications when I used the tool to start
+> Thunderbird in minimized mode. Something must be seriously broken. DO NOT USE
+> THE TOOL NOW!
+
+> [!WARNING]
 > This is a half-vibe-coded (a large part written by LLM, reviewed and manually
 > modified) tool.
 
