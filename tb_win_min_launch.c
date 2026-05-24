@@ -274,7 +274,8 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine
     STARTUPINFOW si = {0};
     si.cb = sizeof(si);
     si.dwFlags = STARTF_USESHOWWINDOW;
-    si.wShowWindow = SW_SHOWMINNOACTIVE;
+    // si.wShowWindow = SW_SHOWMINNOACTIVE;
+    si.wShowWindow = SW_SHOWMINIMIZED;
 
     PROCESS_INFORMATION pi = {0};
     if (!CreateProcessW(NULL, cmdline, NULL, NULL, FALSE,

@@ -93,7 +93,8 @@ static BOOL WINAPI Hooked_ShowWindow(HWND hWnd, int nCmdShow) {
         case SW_SHOWNOACTIVATE:
         case SW_RESTORE:
         case SW_SHOWMAXIMIZED:
-            nCmdShow = SW_SHOWMINNOACTIVE;
+            // nCmdShow = SW_SHOWMINNOACTIVE;
+            nCmdShow = SW_SHOWMINIMIZED;
             break;
         }
     }
@@ -119,7 +120,8 @@ static BOOL WINAPI Hooked_CreateProcessW(
                lpSI->cb <= sizeof(si_copy) ? lpSI->cb : sizeof(si_copy));
     si_copy.cb = sizeof(si_copy);
     si_copy.dwFlags |= STARTF_USESHOWWINDOW;
-    si_copy.wShowWindow = SW_SHOWMINNOACTIVE;
+    // si_copy.wShowWindow = SW_SHOWMINNOACTIVE;
+    si_copy.wShowWindow = SW_SHOWMINIMIZED;
 
     PROCESS_INFORMATION pi_local = {0};
     BOOL ret = fpCreateProcessW(lpApp, lpCmd, lpPA, lpTA, bInherit,
@@ -157,7 +159,8 @@ static BOOL WINAPI Hooked_CreateProcessA(
                lpSI->cb <= sizeof(si_copy) ? lpSI->cb : sizeof(si_copy));
     si_copy.cb = sizeof(si_copy);
     si_copy.dwFlags |= STARTF_USESHOWWINDOW;
-    si_copy.wShowWindow = SW_SHOWMINNOACTIVE;
+    // si_copy.wShowWindow = SW_SHOWMINNOACTIVE;
+    si_copy.wShowWindow = SW_SHOWMINIMIZED;
 
     PROCESS_INFORMATION pi_local = {0};
     BOOL ret = fpCreateProcessA(lpApp, lpCmd, lpPA, lpTA, bInherit,
